@@ -1,8 +1,8 @@
-import turtle
+from turtle import *
 import math
-turtle.tracer(100, 0)
-turtle.setworldcoordinates(0, 0, 960, 810)
-turtle.bgcolor(0.1, 0.1, 0.1)
+tracer(1, 0)
+setworldcoordinates(0, 0, 960, 810)
+bgcolor(0.1, 0.1, 0.1)
 
 BASE_SIZE = 13
 BASE_HEIGHT = BASE_SIZE * math.sin(60 * (math.pi / 180))
@@ -10,16 +10,16 @@ START_X = 50
 START_Y = 20
 
 def draw_triangle(x, y, color):
-    turtle.penup()
-    turtle.pencolor(color)
-    turtle.goto(x, y) # go to bottom-left corner
-    turtle.pendown()
-    turtle.setheading(60)
-    turtle.forward(BASE_SIZE) # draw first side
-    turtle.right(120)
-    turtle.forward(BASE_SIZE) # draw second side
-    turtle.right(120)
-    turtle.forward(BASE_SIZE) # draw third side
+    penup()
+    pencolor(color)
+    goto(x, y) # go to bottom-left corner
+    pendown()
+    setheading(60)
+    forward(BASE_SIZE) # draw first side
+    right(120)
+    forward(BASE_SIZE) # draw second side
+    right(120)
+    forward(BASE_SIZE) # draw third side
 
 def draw_sierpinski(x, y, level, color):
     if level == 0:
@@ -38,6 +38,6 @@ for i in range(5, -1, -1):
     blue = 0.05 * i
     draw_sierpinski(START_X, START_Y, i, (red, green, blue))
 
-turtle.hideturtle()    
-turtle.update()
-turtle.exitonclick()
+hideturtle()    
+update()
+exitonclick()
