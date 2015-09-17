@@ -37,11 +37,11 @@ def draw_tree(x, y, direction, seed):
     
     # try changing these values and looking at the results
     random.seed(seed)
-    LEFT_ANGLE     = random.randint(20,  40)
-    RIGHT_ANGLE    = random.randint(20,  40)
+    LEFT_ANGLE     = random.randint(10,  30)
+    RIGHT_ANGLE    = random.randint(10,  30)
     LEFT_DECREASE  = random.randint( 6,  15)
     RIGHT_DECREASE = random.randint( 6,  15)
-    START_SIZE     = random.randint(60, 110)
+    START_SIZE     = random.randint(80, 120)
 
     branch(x, y, direction, START_SIZE)
     update()
