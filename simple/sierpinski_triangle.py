@@ -34,8 +34,8 @@ def draw_sierpinski(x, y, level, color):
 # loop from 5 to 0, drawing 5 sets of sierpinski triangles each with a different color
 for i in range(5, -1, -1): 
     red = 1 - (0.2 * i)
-    green = 0.05 * i
-    blue = 0.05 * i
+    green = 0.1 * i
+    blue = 0.1 * i
     draw_sierpinski(START_X, START_Y, i, (red, green, blue))
 
 hideturtle()    
