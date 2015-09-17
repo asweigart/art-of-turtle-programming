@@ -2,8 +2,8 @@ from turtle import *
 
 tracer(100, 0)
 
-FG_COLOR = (1.0, 0.67, 0.0)
-BG_COLOR = (0.07, 0.24, 0.67)
+FG_COLOR = ('#FFD78E')
+BG_COLOR = ('#517DB2')
 
 bgcolor(BG_COLOR)
 pencolor(FG_COLOR)
