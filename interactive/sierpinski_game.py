@@ -18,15 +18,15 @@ def setup_clicks(x, y):
     if click_num == 1:
         point_A = (x, y)
         goto(point_A)
-        dot(12, 'red')
+        #dot(12, 'red') # (!) Try commenting this out to hide the red dot
     elif click_num == 2:
         point_B = (x, y)
         goto(point_B)
-        dot(12, 'green')
+        #dot(12, 'green') # (!) Try commenting this out to hide the green dot
     elif click_num == 3:
         point_C = (x, y)
         goto(point_C)
-        dot(12, 'blue')
+        #dot(12, 'blue') # (!) Try commenting this out to hide the blue dot
     elif click_num == 4:
         goto(x, y)
         start_the_game()
