@@ -32,7 +32,7 @@ while current_number < 40000:
 
             if divs > 0:
                 dot((int(math.sqrt(divs)) + 1) * 2, '#76b7eb')
-            #else:
+            #else: # (!) Try uncommenting these two lines.
             #    dot(4, '#ffa25e')
             forward(SPACING)
         left(90)
