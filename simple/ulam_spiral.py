@@ -30,7 +30,7 @@ while current_number < 40000:
             divs = amount_of_divisors(current_number)
             current_number += 1
 
-            if divs > 0:
+            if divs == 0: # (!) Try changing > to == so that primes are marked.
                 dot((int(math.sqrt(divs)) + 1) * 2, '#76b7eb')
             #else: # (!) Try uncommenting these two lines.
             #    dot(4, '#ffa25e')
