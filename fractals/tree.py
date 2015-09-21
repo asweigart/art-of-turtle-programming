@@ -9,7 +9,7 @@ def branch(x, y, direction, branch_length):
     if branch_length < 5:
         return
 
-    # draw the trunk
+    # draw the "trunk"
     pensize(max(branch_length / 7.0, 1))
     forward(branch_length)
 
