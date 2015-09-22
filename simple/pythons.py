@@ -1,6 +1,6 @@
 from turtle import *
 import random
-tracer(1, 0)
+tracer(100, 0)
 
 GAP = 10
 THICKNESS = 20
