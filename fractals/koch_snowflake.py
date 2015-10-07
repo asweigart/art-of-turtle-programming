@@ -30,3 +30,4 @@ pendown()
 
 for lev in range(5):
     draw_snowflake(LENGTH, lev)
+exitonclick()
