@@ -1,8 +1,8 @@
 from turtle import *
 import math
-tracer(1, 0)
+tracer(1000, 0)
 setworldcoordinates(0, 0, 960, 810)
-bgcolor(0.1, 0.1, 0.1)
+bgcolor(0.9, 0.9, 0.9)
 
 BASE_SIZE = 13
 BASE_HEIGHT = BASE_SIZE * math.sin(60 * (math.pi / 180))
@@ -32,12 +32,12 @@ def draw_sierpinski(x, y, level, color):
         draw_sierpinski(x + (BASE_SIZE * (2 ** level)), y, level - 1, color)
 
 # loop from 5 to 0, drawing 5 sets of sierpinski triangles each with a different color
-for i in range(5, -1, -1): 
+for i in range(5, -1, -1):
     red = 1 - (0.2 * i)
     green = 0.1 * i
     blue = 0.1 * i
     draw_sierpinski(START_X, START_Y, i, (red, green, blue))
 
-hideturtle()    
+hideturtle()
 update()
 exitonclick()

@@ -1,50 +1,56 @@
-from turtle import *
 import random
 import time
+import turtle
+turtle.tracer(1000, 0) # Increase the first argument to speed up the drawing.
+turtle.setworldcoordinates(0, 0, 700, 700)
+turtle.hideturtle()
 
-tracer(1000, 0)
-
-def branch(x, y, direction, branch_length):
-    # if the branch is too small, just quit
-    if branch_length < 5:
+def drawBranch(startPosition, direction, branchLength):
+    if branchLength < 5:
+        # base case
         return
 
-    # draw the "trunk"
-    pensize(max(branch_length / 7.0, 1))
-    forward(branch_length)
+    # Go to the starting point & direction.
+    turtle.penup()
+    turtle.goto(startPosition)
+    turtle.setheading(direction)
 
-    # draw the two branches, which are fractal trees
-    left(LEFT_ANGLE)
-    branch(xcor(), ycor(), heading(), branch_length - LEFT_DECREASE)
-    right(LEFT_ANGLE + RIGHT_ANGLE)
-    branch(xcor(), ycor(), heading(), branch_length - RIGHT_DECREASE)
-    left(RIGHT_ANGLE)
+    # Draw the branch (thickness is 1/7 the length).
+    turtle.pendown()
+    turtle.pensize(max(branchLength / 7.0, 1))
+    turtle.forward(branchLength)
 
-    # return back to the starting point
-    penup()
-    goto(x, y)
-    setheading(direction)
-    pendown()
+    # Record the position of the branch's end.
+    endPosition = turtle.position()
+    leftDirection = direction + LEFT_ANGLE
+    leftBranchLength = branchLength - LEFT_DECREASE
+    rightDirection = direction - RIGHT_ANGLE
+    rightBranchLength = branchLength - RIGHT_DECREASE
 
-def draw_tree(x, y, direction, seed):
-    global LEFT_ANGLE, RIGHT_ANGLE, LEFT_DECREASE, RIGHT_DECREASE
+    # recursive case
+    drawBranch(endPosition, leftDirection, leftBranchLength)
+    drawBranch(endPosition, rightDirection, rightBranchLength)
 
-    # go to the starting point
-    penup()
-    goto(x, y)
-    setheading(direction)
-    pendown()
-    
-    # try changing these values and looking at the results
+seed = 0
+while True:
+    # Get psuedorandom numbers for the branch properties.
     random.seed(seed)
     LEFT_ANGLE     = random.randint(10,  30)
-    RIGHT_ANGLE    = random.randint(10,  30)
     LEFT_DECREASE  = random.randint( 6,  15)
+    RIGHT_ANGLE    = random.randint(10,  30)
     RIGHT_DECREASE = random.randint( 6,  15)
-    START_SIZE     = random.randint(80, 120)
+    START_LENGTH   = random.randint(80, 120)
 
-    branch(x, y, direction, START_SIZE)
-    update()
+    # Write out the seed number.
+    turtle.clear()
+    turtle.penup()
+    turtle.goto(10, 10)
+    turtle.write('Seed: %s' % (seed))
 
-draw_tree(0, -310, 90, 123)
-exitonclick()
+    # Draw the tree.
+    drawBranch((350, 10), 90, START_LENGTH)
+    turtle.update()
+    time.sleep(2)
+
+    seed = seed + 1 # Use the next number for the next seed.
+
