@@ -1,58 +1,64 @@
-from turtle import *
+# Hilbert Curve, by Al Sweigart al@inventwithpython.com
+# Draws the Hilbert Curve fractal with turtle graphics.
+# More info at: https://en.wikipedia.org/wiki/hilbertCurve
+# Good videos on space-filling curves: https://youtu.be/RU0wScIj36o
+# and https://youtu.be/3s7h2MHQtxc
+
+import turtle
 
 SIZE  = 10 # (!) Try changing the line length by a litte.
 ANGLE = 90 # (!) Try changing the turning angle by a litte.
 LEVEL = 5  # (!) Try changing the recursive level by a litte.
 
-bgcolor('#B20059')
-pencolor('#FFE6F2')
-fillcolor('#FFE6F2')
+MAGENTA = '#B20059'
+PINK = '#FFE6F2'
+turtle.bgcolor(MAGENTA)
+turtle.pencolor(PINK)
+turtle.fillcolor(PINK)
 
-speed('fastest')
-#tracer(1, 0) # (!) Try uncommenting this line to draw the shape faster.
+turtle.tracer(1, 0) # Make the turtle draw faster.
 
-penup()
-goto(-320, 0)
-pendown()
+turtle.penup()
+turtle.goto(-320, 0)
+turtle.pendown()
 
-#setheading(20) # (!) Try uncommenting this line.
+#turtle.setheading(20) # (!) Try uncommenting this line.
 
-def hilbert_curve(level, angle):
+def hilbertCurve(level, angle):
     if level == 0:
         return
 
-    right(angle)
-    hilbert_curve(level - 1, -angle)
-    forward(SIZE)
-    left(angle)
-    hilbert_curve(level - 1, angle)
-    forward(SIZE)
-    hilbert_curve(level - 1, angle)
-    left(angle)
-    forward(SIZE)
-    hilbert_curve(level - 1, -angle)
-    right(angle)
+    turtle.right(angle)
+    hilbertCurve(level - 1, -angle)
+    turtle.forward(SIZE)
+    turtle.left(angle)
+    hilbertCurve(level - 1, angle)
+    turtle.forward(SIZE)
+    hilbertCurve(level - 1, angle)
+    turtle.left(angle)
+    turtle.forward(SIZE)
+    hilbertCurve(level - 1, -angle)
+    turtle.right(angle)
 
-def filled_in_hilbert():
-    begin_fill()
-    hilbert_curve(LEVEL, ANGLE) # draw first quadrant
-    forward(SIZE)
+def filledInHilbert():
+    turtle.begin_fill()
+    hilbertCurve(LEVEL, ANGLE) # draw first quadrant
+    turtle.forward(SIZE)
 
-    hilbert_curve(LEVEL, ANGLE) # draw second quadrant
-    left(ANGLE)
-    forward(SIZE)
-    left(ANGLE)
+    hilbertCurve(LEVEL, ANGLE) # draw second quadrant
+    turtle.left(ANGLE)
+    turtle.forward(SIZE)
+    turtle.left(ANGLE)
 
-    hilbert_curve(LEVEL, ANGLE) # draw third quadrant
-    forward(SIZE)
+    hilbertCurve(LEVEL, ANGLE) # draw third quadrant
+    turtle.forward(SIZE)
 
-    hilbert_curve(LEVEL, ANGLE) # draw fourth quadrant
-    left(ANGLE)
-    forward(SIZE)
-    left(ANGLE)
-    end_fill()
+    hilbertCurve(LEVEL, ANGLE) # draw fourth quadrant
+    turtle.left(ANGLE)
+    turtle.forward(SIZE)
+    turtle.left(ANGLE)
+    turtle.end_fill()
 
-filled_in_hilbert()
-update()
-exitonclick()
-
+filledInHilbert()
+turtle.update() # Finish drawing the screen.
+turtle.exitonclick() # When user clicks on the window, close it.

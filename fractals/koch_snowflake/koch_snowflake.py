@@ -1,33 +1,53 @@
-from turtle import *
-tracer(1, 0)
+# Koch Snowflake, by Al Sweigart al@inventwithpython.com
+# Draws a Koch snowflake fractal with turtle graphics.
 
-def snowflake_side(length_side, levels):
+import turtle
+turtle.tracer(1, 0) # Make the turtle draw faster.
+
+LEVELS = 5 # More than 5 levels becomes too small to see.
+
+def snowflakeSide(sideLength, levels):
+    # Draw a single side of the snowflake (this is called a Koch curve):
+    turtle.pencolor('black')
     if levels == 0:
-        forward(length_side)
+        turtle.forward(sideLength)
         return
-    length_side = length_side / 3.0
-    snowflake_side(length_side, levels-1)
-    left(60)
-    snowflake_side(length_side, levels-1)
-    right(120)
-    snowflake_side(length_side, levels-1)
-    left(60)
-    snowflake_side(length_side, levels-1)
+    sideLength = sideLength / 3.0
+    snowflakeSide(sideLength, levels-1)
 
-def draw_snowflake(length_side, levels):
+    # "Erase" the middle segment by drawing a white line over it.
+    turtle.pencolor('white')
+    turtle.pensize(2)
+    turtle.forward(sideLength)
+    turtle.forward(-sideLength)
+    turtle.pencolor('black')
+    turtle.pensize(1)
+
+    turtle.left(60)
+    snowflakeSide(sideLength, levels-1)
+    turtle.right(120)
+    snowflakeSide(sideLength, levels-1)
+    turtle.left(60)
+    snowflakeSide(sideLength, levels-1)
+
+def drawSnowflake(sideLength, levels):
+    # Draw 6 Koch curves to draw a Koch snowflake.
     for i in range(6):
-        snowflake_side(length_side, levels)
-        right(60)
+        snowflakeSide(sideLength, levels)
+        turtle.right(60)
 
-
+# Move into the starting position:
 LENGTH = 300.0
-penup()
-backward(LENGTH / 2.0)
-right(90)
-backward(1.75 * LENGTH / 2.0)
-left(90)
-pendown()
+turtle.penup()
+turtle.backward(LENGTH / 2.0)
+turtle.right(90)
+turtle.backward(1.75 * LENGTH / 2.0)
+turtle.left(90)
+turtle.pendown()
 
-for lev in range(5):
-    draw_snowflake(LENGTH, lev)
-exitonclick()
+# Draw the snowflake:
+for lev in range(LEVELS):
+    drawSnowflake(LENGTH, lev)
+
+turtle.update() # Finish drawing the screen.
+turtle.exitonclick() # When user clicks on the window, close it.

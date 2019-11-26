@@ -31,9 +31,9 @@ def setup_clicks(x, y):
         goto(x, y)
         start_the_game()
     click_num +=  1
-    
+
 def start_the_game():
-    global point_A, point_B, point_C    
+    global point_A, point_B, point_C
 
     # start in the middle of the triangle
     left = min(point_A[0], point_B[0], point_C[0])
@@ -41,7 +41,7 @@ def start_the_game():
     bottom = min(point_A[1], point_B[1], point_C[1])
     top = max(point_A[1], point_B[1], point_C[1])
     goto(left + int((right - left) / 2), bottom + int((top - bottom) / 2))
-    
+
     for i in range(25000):
         roll = random.randint(1, 3)
         if roll == 1:
@@ -57,12 +57,12 @@ def start_the_game():
         dot(2)
 
         if i == 20:
-            tracer(4, 0)
+            tracer(4, 0) # Make the turtle draw fast.
         elif i == 2000:
-            tracer(100, 0)
+            tracer(100, 0) # Make the turtle draw faster.
         elif i == 4000:
-            tracer(10000, 0)
+            tracer(10000, 0) # Make the turtle draw fastest.
 
 
 onscreenclick(setup_clicks)
-done()
+mainloop() # Start the program, and run until the window is closed.

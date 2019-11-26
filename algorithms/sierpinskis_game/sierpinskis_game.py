@@ -1,19 +1,20 @@
-from turtle import *
-import random
-tracer(1, 0)
-setworldcoordinates(0, 0, 960, 810)
-bgcolor(0.1, 0.1, 0.1)
-pencolor(1.0, 0.0, 0.0)
-penup()
-DOT_SIZE = 3
+# Sierpinkski's Game, by Al Sweigart al@inventwithpython.com
+# Sierpinkski's "game" is an algorithm that draws Sierpinski's Triangle
+# with turtle graphics.
+# More info at https://en.wikipedia.org/wiki/Chaos_game
 
-# TODO - animate this and also have the colors cycle
+import turtle
+import random, time
+turtle.tracer(60, 0) # Make the turtle draw faster.
+turtle.setworldcoordinates(0, 0, 960, 810)
+turtle.bgcolor(0.1, 0.1, 0.1)
+turtle.penup()
+
+DOT_SIZE = 3
+NUMBER_OF_DOTS = 1500
 
 def halfway(x1, y1, x2, y2):
-    #print('halfway of %s, %s and %s, %s is %s, %s' % (x1, y1, x2, y2, int(abs(x1 - x2) / 2.0) + min(x1, x2), int(abs(y1 - y2) / 2.0) + min(y1, y2)))
-    #return (int(abs(x1 - x2) / 2.0) + min(x1, x2), int(abs(y1 - y2) / 2.0) + min(y1, y2))
-
-    # debug - more lines of code than the previous one-liner, but might be easier to read
+    # Find the distance halfway between x1, y1 and x2, y2:
     if x1 > x2:
         halfwayx = int(abs(x1 - x2) / 2.0) + x2
     else:
@@ -26,27 +27,53 @@ def halfway(x1, y1, x2, y2):
 
     return (halfwayx, halfwayy)
 
-def play_sierpinskis_game(ax, ay, bx, by, cx, cy):
+
+def playSierpinskisGame(ax, ay, bx, by, cx, cy):
+    # Start the point at ax, ay:
     px = ax
     py = ay
 
-    for i in range(1000):
+    # Draw dots:
+    for i in range(NUMBER_OF_DOTS):
+        # Pick a random triangle point to move towards:
         random_point = random.randint(1, 3)
-        if random_point == 1:
-            px, py = halfway(px, py, ax, ay)
-            goto(px, py)
-            dot(DOT_SIZE)
-        elif random_point == 2:
-            px, py = halfway(px, py, bx, by)
-            goto(px, py)
-            dot(DOT_SIZE)
-        elif random_point == 3:
-            px, py = halfway(px, py, cx, cy)
-            goto(px, py)
-            dot(DOT_SIZE)
 
-play_sierpinskis_game(random.randint(0, 960), random.randint(0, 810),
-                      random.randint(0, 960), random.randint(0, 810),
-                      random.randint(0, 960), random.randint(0, 810))
-update()
-exitonclick()
+        # Move halfway to that point:
+        if random_point == 1:
+            # Move halfway to point A:
+            px, py = halfway(px, py, ax, ay)
+            turtle.goto(px, py)
+            turtle.dot(DOT_SIZE) # Mark the dot.
+        elif random_point == 2:
+            # Move halfway to point B:
+            px, py = halfway(px, py, bx, by)
+            turtle.goto(px, py)
+            turtle.dot(DOT_SIZE) # Mark the dot.
+        elif random_point == 3:
+            # Move halfway to point C:
+            px, py = halfway(px, py, cx, cy)
+            turtle.goto(px, py)
+            turtle.dot(DOT_SIZE) # Mark the dot.
+    turtle.update() # Finish drawing the screen.
+
+
+while True:
+    # Pick a random color to draw with:
+    redAmount = random.randint(50, 100) / 100.0
+    greenAmount = random.randint(50, 100) / 100.0
+    blueAmount = random.randint(50, 100) / 100.0
+    turtle.pencolor(redAmount, greenAmount, blueAmount)
+
+    # Pick three random points for the triangle:
+    ax = random.randint(0, 960)
+    ay = random.randint(0, 810)
+    bx = random.randint(0, 960)
+    by = random.randint(0, 810)
+    cx = random.randint(0, 960)
+    cy = random.randint(0, 810)
+
+    # Play Sierpinski's Game to draw Sierpinski's Triangle:
+    playSierpinskisGame(ax, ay, bx, by, cx, cy)
+
+    time.sleep(2) # Pause for two seconds before clearing the screen.
+    turtle.clear()
