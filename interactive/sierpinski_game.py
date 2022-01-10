@@ -8,6 +8,7 @@ import random
 setworldcoordinates(0, 0, 960, 810)
 bgcolor('#4b4b6e')
 pencolor('white')
+pensize(2)
 penup()
 
 click_num = 1
@@ -59,9 +60,7 @@ def start_the_game():
         if i == 20:
             tracer(4, 0) # Make the turtle draw fast.
         elif i == 2000:
-            tracer(100, 0) # Make the turtle draw faster.
-        elif i == 4000:
-            tracer(10000, 0) # Make the turtle draw fastest.
+            tracer(10000, 0) # Make the turtle draw faster.
 
 
 onscreenclick(setup_clicks)
